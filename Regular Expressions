@@ -1,0 +1,48 @@
+
+
+
+
+([a-zA-Z0-9\s_\\.\-:])+(.doc|.docx|.pdf|.txt)$
+
+Regular Expression for allowing Word Document and PDF files only
+([a-zA-Z0-9\s_\\.\-:])+(.doc|.docx|.pdf)$
+
+
+
+Regular Expression for allowing Image files only
+([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif)$
+
+
+Regular Expression for allowing Text files only
+([a-zA-Z0-9\s_\\.\-:])+(.txt)$
+
+
+Regular Expression for allowing Excel files only
+([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$
+
+
+
+
+
+/^\d{10}$/                               Mobile
+
+^[0][1-9]\d{9}$|^[1-9]\d{9}$             Mobile 09922420135
+[A-Z]+     CAPS ONLY
+
+/[A-Z]+[a-z]+$/   First letter capital
+
+^[0-9]*$    Numbers oonly
+------------------------------------
+[0-9]{5}   ----> 5 digits only
+[0-9]{5,10}   ----> Min 5 digits and Max 10 digits
+[A-Z]+  ----->only CAps
+[A-Za-z]+   -----> Caps and small but no digit
+[A-Za-z0-9]+ -----> Caps ,small and nos and no special chars....
+
+
+-----------------
+"password must contain at least one digit, onelower char and one upper char, one special char, and doesn't contain spaces"
+
+ ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).+$
+RG.txt
+Displaying RG.txt.
