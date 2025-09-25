@@ -1,0 +1,74 @@
+using System;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Web.UI;
+
+public partial class UploadDownload : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (FileUpload1.HasFile)
+            {
+                string fileName = FileUpload1.FileName;
+                string fileExtension = Path.GetExtension(fileName).ToLower();
+
+                // ✅ Regex to allow only .doc, .docx, .pdf, .txt
+                string pattern = @"([a-zA-Z0-9\s_\\.\-:])+(.doc|.docx|.pdf|.txt)$";
+
+                if (Regex.IsMatch(fileName, pattern))
+                {
+                    string savePath = Server.MapPath("~//Resumes//") + fileName;
+                    FileUpload1.SaveAs(savePath);
+
+                    Lbl_msg.Text = "<b>File Uploaded Successfully...</b><br />";
+                    Lbl_msg.Text += "File Name : " + fileName + "<br />";
+                    Lbl_msg.Text += "Type : " + FileUpload1.PostedFile.ContentType + "<br />";
+                    Lbl_msg.Text += "Length : " + FileUpload1.PostedFile.ContentLength + " bytes<br />";
+                }
+                else
+                {
+                    Lbl_msg.Text = "❌ Only Word, PDF, or Text files are allowed!";
+                }
+            }
+            else
+            {
+                Lbl_msg.Text = "Please Select Resume...";
+            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write("Error: " + ex.Message);
+        }
+        finally
+        {
+            Response.Write("<br />Thank you..");
+        }
+    }
+
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+        string filename = "Exam2.docx";
+        string filepath = Server.MapPath("~//Resumes//" + filename);
+
+        if (File.Exists(filepath))
+        {
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + filename);
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            Response.WriteFile(filepath);
+            Response.End();
+        }
+        else
+        {
+            Lbl_msg.Text = "❌ File not found!";
+        }
+    }
+}
